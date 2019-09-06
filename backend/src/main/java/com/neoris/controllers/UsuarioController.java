@@ -22,17 +22,17 @@ public class UsuarioController {
 		return us.validarUsuario(usuario);
 	}
 	
-	@RequestMapping(value="borrar",method=RequestMethod.GET)
+	@RequestMapping(value="borrar",method=RequestMethod.POST)
 	public boolean borrarUsuario(String nombreUsuario) {
 		return us.borrarUsuario(nombreUsuario);
 	}
 	
-	@RequestMapping(value="registrar",method = RequestMethod.GET)
+	@RequestMapping(value="registrar",method = RequestMethod.POST)
 	public boolean registrarUsuario(Usuario usuario) {
 		return us.guardarUsuario(usuario);
 	}
 	
-	@RequestMapping(value="modificar",method=RequestMethod.GET)
+	@RequestMapping(value="modificar",method=RequestMethod.POST)
 	public boolean modificar(Usuario usuario) {
 		return us.modificarEmail(usuario, usuario.getEmail());
 	}
