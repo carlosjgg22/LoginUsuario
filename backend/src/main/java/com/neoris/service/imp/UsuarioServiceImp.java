@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.neoris.service.Usuario;
+import com.neoris.dao.Conexion;
+import com.neoris.modelo.Usuario;
 import com.neoris.service.UsuarioService;
 
 public class UsuarioServiceImp implements UsuarioService{
@@ -34,7 +35,7 @@ public class UsuarioServiceImp implements UsuarioService{
 		String sql = "INSERT INTO Usuarios (usuario, password, email, privilegio) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement ps = this.conn.startedConexion().prepareStatement(sql);
-			ps.setString(1, usuario.getNombre());
+			ps.setString(1, usuario.getUsuario());
 			ps.setString(2, usuario.getPassword());
 			ps.setString(3, usuario.getEmail());
 			ps.setInt(3, usuario.getPrivilegio());
@@ -57,13 +58,12 @@ public class UsuarioServiceImp implements UsuarioService{
 		return false;
 	}
 
-	// idUsuario, usuario, password, email privilegio //
 	public boolean modificarEmail(Usuario usuario, String nuevoEmail) {
-		String sql = "UPDATE Usuarios SET email=? WHERE id=?"		
+		String sql = "UPDATE Usuarios SET email=? WHERE id=?";		
 		try {
-			PrepareStatement ps = this.conn.startedConexion().prepareStatement(sql);
+			PreparedStatement ps = this.conn.startedConexion().prepareStatement(sql);
 			ps.setString(1, nuevoEmail);
-			ps.setInt(2, usuario.getId());
+			ps.setInt(2, usuario.getIdUsuario());
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
